@@ -51,9 +51,17 @@ log "Starting Asahi Linux Hyprland installation for MacBook M1 Air..."
 # Complete cleanup of existing Hyprland installation
 log "Performing complete cleanup of existing Hyprland installation..."
 
-# Stop any running Hyprland session
-pkill -f hyprland 2>/dev/null || true
-pkill -f Hyprland 2>/dev/null || true
+# Stop any running Hyprland session (safer approach)
+if pgrep -f hyprland >/dev/null 2>&1; then
+    log "Found running Hyprland processes, attempting to stop them..."
+    pkill -f hyprland 2>/dev/null || true
+    sleep 2
+fi
+if pgrep -f Hyprland >/dev/null 2>&1; then
+    log "Found running Hyprland processes, attempting to stop them..."
+    pkill -f Hyprland 2>/dev/null || true
+    sleep 2
+fi
 
 # Remove existing configurations
 if [ -d ~/.config/hypr ]; then

@@ -1,0 +1,340 @@
+/* Waybar Style Configuration for MacBook M1 Air */
+/* Modern, clean design with Czech locale support */
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "SF Pro Display", "JetBrainsMono Nerd Font", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: rgba(30, 30, 46, 0.8);
+    border-radius: 16px;
+    color: #cdd6f4;
+    transition-property: background-color;
+    transition-duration: .5s;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(205, 214, 244, 0.1);
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+button {
+    box-shadow: inset 0 -3px transparent;
+    border: none;
+    border-radius: 10px;
+    padding: 0 8px;
+    margin: 3px;
+    background-color: transparent;
+    color: inherit;
+}
+
+button:hover {
+    background: rgba(205, 214, 244, 0.1);
+    box-shadow: inset 0 -3px rgba(138, 173, 244, 0.5);
+}
+
+#workspaces button {
+    padding: 0 8px;
+    background-color: transparent;
+    color: #6c7086;
+    border-radius: 12px;
+    margin: 4px 2px;
+    transition: all 0.3s ease;
+}
+
+#workspaces button:hover {
+    background: rgba(138, 173, 244, 0.2);
+    color: #8aadf4;
+    transform: translateY(-2px);
+}
+
+#workspaces button.active {
+    background: linear-gradient(45deg, #8aadf4, #c6a0f6);
+    color: #1e1e2e;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(138, 173, 244, 0.3);
+}
+
+#workspaces button.urgent {
+    background-color: #f38ba8;
+    color: #1e1e2e;
+    animation: blink 1s linear infinite alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #f9e2af;
+        color: #1e1e2e;
+    }
+}
+
+#mode {
+    background-color: #64748b;
+    border-bottom: 3px solid #ffffff;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#mpd,
+#keyboard-state {
+    padding: 0 10px;
+    color: #cdd6f4;
+    border-radius: 12px;
+    margin: 4px 2px;
+    background: rgba(205, 214, 244, 0.05);
+    border: 1px solid rgba(205, 214, 244, 0.1);
+    transition: all 0.3s ease;
+}
+
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#backlight:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover,
+#idle_inhibitor:hover {
+    background: rgba(205, 214, 244, 0.1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+.modules-right > widget:last-child > #tray {
+    margin-right: 0;
+}
+
+#clock {
+    background: linear-gradient(45deg, #8aadf4, #c6a0f6);
+    color: #1e1e2e;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#battery {
+    background-color: #a6e3a1;
+    color: #1e1e2e;
+}
+
+#battery.charging, #battery.plugged {
+    color: #1e1e2e;
+    background-color: #a6e3a1;
+}
+
+@keyframes blink {
+    to {
+        background-color: #f9e2af;
+        color: #1e1e2e;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f38ba8;
+    color: #1e1e2e;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#cpu {
+    background-color: #94e2d5;
+    color: #1e1e2e;
+}
+
+#memory {
+    background-color: #f9e2af;
+    color: #1e1e2e;
+}
+
+#disk {
+    background-color: #fab387;
+    color: #1e1e2e;
+}
+
+#backlight {
+    background-color: #f9e2af;
+    color: #1e1e2e;
+}
+
+#network {
+    background-color: #cba6f7;
+    color: #1e1e2e;
+}
+
+#network.disconnected {
+    background-color: #f38ba8;
+    color: #1e1e2e;
+}
+
+#pulseaudio {
+    background-color: #89b4fa;
+    color: #1e1e2e;
+}
+
+#pulseaudio.muted {
+    background-color: #6c7086;
+    color: #cdd6f4;
+}
+
+#wireplumber {
+    background-color: #89b4fa;
+    color: #1e1e2e;
+}
+
+#wireplumber.muted {
+    background-color: #6c7086;
+    color: #cdd6f4;
+}
+
+#custom-media {
+    background-color: #a6e3a1;
+    color: #1e1e2e;
+    min-width: 100px;
+}
+
+#custom-media.custom-spotify {
+    background-color: #a6e3a1;
+    color: #1e1e2e;
+}
+
+#custom-media.custom-vlc {
+    background-color: #fab387;
+    color: #1e1e2e;
+}
+
+#temperature {
+    background-color: #f38ba8;
+    color: #1e1e2e;
+}
+
+#temperature.critical {
+    background-color: #f38ba8;
+    color: #1e1e2e;
+    animation: blink 1s linear infinite alternate;
+}
+
+#tray {
+    background-color: rgba(205, 214, 244, 0.1);
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #f38ba8;
+    border-radius: 12px;
+}
+
+#idle_inhibitor {
+    background-color: #585b70;
+    color: #cdd6f4;
+}
+
+#idle_inhibitor.activated {
+    background-color: #eba0ac;
+    color: #1e1e2e;
+}
+
+#keyboard-state {
+    background: #94e2d5;
+    color: #1e1e2e;
+    padding: 0 8px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state > label {
+    padding: 0 0px;
+}
+
+#keyboard-state > label.locked {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad.empty {
+	background-color: transparent;
+}
+
+#window {
+    background: rgba(205, 214, 244, 0.05);
+    border: 1px solid rgba(205, 214, 244, 0.1);
+    border-radius: 12px;
+    padding: 0 15px;
+    margin: 4px;
+    font-weight: 500;
+    color: #cdd6f4;
+}
+
+/* Czech keyboard layout indicator */
+.czech-layout {
+    background: linear-gradient(45deg, #dc143c, #ffffff, #11457e);
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 1200px) {
+    #cpu, #memory, #temperature {
+        font-size: 12px;
+        padding: 0 6px;
+    }
+}
+
+/* Animation for active elements */
+.module-active {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
