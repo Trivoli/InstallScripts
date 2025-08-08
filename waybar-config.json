@@ -10,7 +10,7 @@
     "modules-center": ["hyprland/window"],
     "modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "battery", "battery#bat2", "clock", "tray"],
 
-    // Modules configuration
+    /* Modules configuration */
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
