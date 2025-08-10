@@ -2,15 +2,16 @@
 # Optimized for Apple Silicon with Czech keyboard support
 
 # Monitor configuration
-monitor=,preferred,auto,1
+monitor=,preferred,auto,1.33
 
 # Input configuration - Czech keyboard support
 input {
-    kb_layout = us,cz
-    kb_variant = ,qwerty
-    kb_model = pc104
-    kb_options = grp:alt_shift_toggle,compose:ralt,caps:escape
+    kb_layout = cz
+    kb_variant = 
+    kb_model = 
+    kb_options = ctrl:swap_lwin_lctl
     kb_rules = 
+
 
     follow_mouse = 1
     natural_scroll = true
@@ -59,11 +60,11 @@ decoration {
         ignore_opacity = true
     }
 
-    drop_shadow = true
-    shadow_range = 20
-    shadow_render_power = 3
-    col.shadow = rgba(1a1a1aee)
-    col.shadow_inactive = rgba(1a1a1a88)
+#    drop_shadow = true
+ #   shadow_range = 20
+  #  shadow_render_power = 3
+   # col.shadow = rgba(1a1a1aee)
+    #col.shadow_inactive = rgba(1a1a1a88)
     
     dim_inactive = false
     dim_strength = 0.1
@@ -100,14 +101,14 @@ dwindle {
     smart_resizing = true
     force_split = 0
     split_width_multiplier = 1.0
-    no_gaps_when_only = false
+#    no_gaps_when_only = false
     use_active_for_splits = true
 }
 
 master {
-    new_is_master = true
+ #   new_is_master = true
     new_on_top = false
-    no_gaps_when_only = false
+ #   no_gaps_when_only = false
     orientation = left
     inherit_fullscreen = true
     always_center_master = false
@@ -125,7 +126,7 @@ gestures {
     workspace_swipe_cancel_ratio = 0.5
     workspace_swipe_create_new = true
     workspace_swipe_forever = false
-    workspace_swipe_numbered = false
+ #   workspace_swipe_numbered = false
 }
 
 # Miscellaneous settings
@@ -142,7 +143,7 @@ misc {
     enable_swallow = true
     swallow_regex = ^(Alacritty)$
     focus_on_activate = false
-    no_direct_scanout = true
+  #  no_direct_scanout = true
 }
 
 # OpenGL settings for Apple Silicon
@@ -211,7 +212,7 @@ layerrule = ignorezero, notifications
 $mainMod = SUPER
 
 # Application shortcuts
-bind = $mainMod, T, exec, alacritty
+bind = $mainMod, RETURN, exec, alacritty
 bind = $mainMod, Q, killactive
 bind = $mainMod, M, exit
 bind = $mainMod, E, exec, thunar
@@ -221,6 +222,7 @@ bind = $mainMod, P, pseudo # dwindle
 bind = $mainMod, J, togglesplit # dwindle
 bind = $mainMod, F, fullscreen
 bind = $mainMod, L, exec, hyprlock
+bind = $mainMod, B, exec, firefox
 
 # Move focus with mainMod + arrow keys
 bind = $mainMod, left, movefocus, l
@@ -303,6 +305,31 @@ bind = , XF86AudioPause, exec, playerctl play-pause
 bind = , XF86AudioNext, exec, playerctl next
 bind = , XF86AudioPrev, exec, playerctl previous
 bind = , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+# MacBook Air M1 Function Keys (F1–F12)
+# F1: Brightness Down
+bind = , XF86MonBrightnessDown, exec, brightnessctl set 10%- -m
+# F2: Brightness Up
+bind = , XF86MonBrightnessUp, exec, brightnessctl set 10%+ -m
+# F3: Mission Control (show all windows)
+bind = , F3, exec, rofi -show window
+# F4: Launchpad (app launcher)
+bind = , F4, exec, rofi -show drun
+# F5: Keyboard backlight down (if supported)
+bind = , XF86KbdBrightnessDown, exec, brightnessctl -d kbd_backlight set 10%- -m
+# F6: Keyboard backlight up (if supported)
+bind = , XF86KbdBrightnessUp, exec, brightnessctl -d kbd_backlight set 10%+ -m
+# F7: Previous track
+bind = , XF86AudioPrev, exec, playerctl previous
+# F8: Play/Pause
+bind = , XF86AudioPlay, exec, playerctl play-pause
+# F9: Next track
+bind = , XF86AudioNext, exec, playerctl next
+# F10: Mute
+bind = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+# F11: Volume Down (limit to 0-100%)
+bind = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- --limit 1.0
+# F12: Volume Up (limit to 0-100%)
+bind = , XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ --limit 1.0
 
 # Brightness control (MacBook function keys)
 bind = , XF86MonBrightnessUp, exec, brightnessctl set 10%+
