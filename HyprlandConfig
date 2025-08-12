@@ -12,7 +12,6 @@ input {
     kb_options = ctrl:swap_lwin_lctl
     kb_rules = 
 
-
     follow_mouse = 1
     natural_scroll = true
     
@@ -172,8 +171,10 @@ env = XDG_SESSION_TYPE,wayland
 env = XDG_SESSION_DESKTOP,Hyprland
 
 # Startup applications
+# Lock screen immediately on startup - this should be first to avoid seeing desktop
+exec-once = ~/.local/bin/swaylock-logger
 exec-once = waybar
-exec-once = hyprpaper
+exec-once = ~/.local/bin/set-wallpaper
 exec-once = hypridle
 exec-once = /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
@@ -214,14 +215,14 @@ $mainMod = SUPER
 # Application shortcuts
 bind = $mainMod, RETURN, exec, alacritty
 bind = $mainMod, Q, killactive
-bind = $mainMod, M, exit
+bind = $mainMod, M, exec, ~/.local/bin/logout-to-gdm
 bind = $mainMod, E, exec, thunar
 bind = $mainMod, V, togglefloating
 bind = $mainMod, R, exec, rofi -show drun
 bind = $mainMod, P, pseudo # dwindle
 bind = $mainMod, J, togglesplit # dwindle
 bind = $mainMod, F, fullscreen
-bind = $mainMod, L, exec, hyprlock
+bind = $mainMod, L, exec, ~/.local/bin/swaylock-logger
 bind = $mainMod, B, exec, firefox
 
 # Move focus with mainMod + arrow keys
@@ -261,28 +262,30 @@ bind = $mainMod CTRL, K, resizeactive, 0 -20
 bind = $mainMod CTRL, J, resizeactive, 0 20
 
 # Switch workspaces with mainMod + [0-9]
-bind = $mainMod, 1, workspace, 1
-bind = $mainMod, 2, workspace, 2
-bind = $mainMod, 3, workspace, 3
-bind = $mainMod, 4, workspace, 4
-bind = $mainMod, 5, workspace, 5
-bind = $mainMod, 6, workspace, 6
-bind = $mainMod, 7, workspace, 7
-bind = $mainMod, 8, workspace, 8
-bind = $mainMod, 9, workspace, 9
-bind = $mainMod, 0, workspace, 10
+# Czech keyboard: 1 = +, 2 = ě, 3 = š, 4 = č, 5 = ř, 6 = ž, 7 = ý, 8 = á, 9 = í, 0 = é
+
+bind = $mainMod, PLUS, workspace, 1
+bind = $mainMod, ECARON, workspace, 2
+bind = $mainMod, SCARON, workspace, 3
+bind = $mainMod, CCARON, workspace, 4
+bind = $mainMod, RCARON, workspace, 5
+bind = $mainMod, ZCARON, workspace, 6
+bind = $mainMod, YACUTE, workspace, 7
+bind = $mainMod, AACUTE, workspace, 8
+bind = $mainMod, IACUTE, workspace, 9
+bind = $mainMod, EACUTE, workspace, 10
 
 # Move active window to a workspace with mainMod + SHIFT + [0-9]
-bind = $mainMod SHIFT, 1, movetoworkspace, 1
-bind = $mainMod SHIFT, 2, movetoworkspace, 2
-bind = $mainMod SHIFT, 3, movetoworkspace, 3
-bind = $mainMod SHIFT, 4, movetoworkspace, 4
-bind = $mainMod SHIFT, 5, movetoworkspace, 5
-bind = $mainMod SHIFT, 6, movetoworkspace, 6
-bind = $mainMod SHIFT, 7, movetoworkspace, 7
-bind = $mainMod SHIFT, 8, movetoworkspace, 8
-bind = $mainMod SHIFT, 9, movetoworkspace, 9
-bind = $mainMod SHIFT, 0, movetoworkspace, 10
+bind = $mainMod SHIFT, PLUS, movetoworkspace, 1
+bind = $mainMod SHIFT, ECARON, movetoworkspace, 2
+bind = $mainMod SHIFT, SCARON, movetoworkspace, 3
+bind = $mainMod SHIFT, CCARON, movetoworkspace, 4
+bind = $mainMod SHIFT, RCARON, movetoworkspace, 5
+bind = $mainMod SHIFT, ZCARON, movetoworkspace, 6
+bind = $mainMod SHIFT, YACUTE, movetoworkspace, 7
+bind = $mainMod SHIFT, ACUTE, movetoworkspace, 8
+bind = $mainMod SHIFT, IACUTE, movetoworkspace, 9
+bind = $mainMod SHIFT, EACUTE, movetoworkspace, 10
 
 # Example special workspace (scratchpad)
 bind = $mainMod, S, togglespecialworkspace, magic
@@ -347,6 +350,12 @@ bind = $mainMod, C, exec, cliphist list | rofi -dmenu | cliphist decode | wl-cop
 # Power menu
 bind = $mainMod SHIFT, E, exec, wlogout
 
+# Power button to trigger swaylock with wallpaper and logging
+bind = , XF86PowerOff, exec, ~/.local/bin/swaylock-logger
+
+# Lid switch handling - turn off screen and lock when closed
+bindl = , switch:on:Lid Switch, exec, hyprctl dispatch dpms off && ~/.local/bin/swaylock-logger
+
 # Czech keyboard specific bindings (examples)
 # These can be customized based on your specific needs
 bind = $mainMod, SEMICOLON, exec, # Czech semicolon handling
@@ -358,3 +367,8 @@ bind = $mainMod ALT, SPACE, exec, rofi -show run
 bind = $mainMod, TAB, exec, rofi -show window
 bind = $mainMod, period, exec, rofi -show emoji
 bind = $mainMod, N, exec, swaync-client -t -sw
+
+# Session management
+bind = $mainMod SHIFT, S, exec, ~/.local/bin/hypr-save-session
+bind = $mainMod SHIFT, R, exec, ~/.local/bin/hypr-restore-session
+
